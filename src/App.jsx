@@ -5,6 +5,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 function App() {
   function handleSearch(city) {
     console.log("Searching for:", city);
+
   }
 
   return (
@@ -13,6 +14,8 @@ function App() {
       <p>Search for the current weather in any city.</p>
 
       <SearchForm onSearch={handleSearch} />
+      <LoadingSpinner />
+      
     </main>
   );
 }
