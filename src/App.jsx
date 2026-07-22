@@ -3,34 +3,25 @@ import ErrorMessage from "./components/ErrorMessage";
 import LoadingSpinner from "./components/LoadingSpinner";
 import SearchForm from "./components/SearchForm";
 import WeatherCard from "./components/WeatherCard";
+import useWeather from "./hooks/useWeather";
 
 function App() {
-  const testWeather = {
-    city: "Johannesburg",
-    country: "South Africa",
-    temperature: 22,
-    description: "Partly cloudy",
-    feelsLike: 21,
-    humidity: 48,
-    windSpeed: 14,
-  };
-
-  function handleSearch(city) {
-    console.log("Searching for:", city);
-  }
+  const { weather, loading, error, searchWeather } = useWeather();
 
   return (
     <main>
       <h1>Weather Finder</h1>
       <p>Search for the current weather in any city.</p>
 
-      <SearchForm onSearch={handleSearch} />
+      <SearchForm onSearch={searchWeather} />
 
-      <LoadingSpinner />
+      {loading && <LoadingSpinner />}
 
-      <ErrorMessage message="We could not find that city." />
+      {!loading && error && <ErrorMessage message={error} />}
 
-      <WeatherCard weather={testWeather} />
+      {!loading && !error && weather && (
+        <WeatherCard weather={weather} />
+      )}
     </main>
   );
 }
