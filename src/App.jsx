@@ -1,6 +1,8 @@
 import "./App.css";
-import SearchForm from "./components/SearchForm";
+import ErrorMessage from "./components/ErrorMessage";
 import LoadingSpinner from "./components/LoadingSpinner";
+import SearchForm from "./components/SearchForm";
+
 
 function App() {
   function handleSearch(city) {
@@ -14,8 +16,11 @@ function App() {
       <p>Search for the current weather in any city.</p>
 
       <SearchForm onSearch={handleSearch} />
-      <LoadingSpinner />
       
+      <LoadingSpinner />
+
+      <ErrorMessage message="We could not find that city." />
+
     </main>
   );
 }
