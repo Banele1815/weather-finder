@@ -1,5 +1,6 @@
 import "./App.css";
 import SearchForm from "./components/SearchForm";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   function handleSearch(city) {
