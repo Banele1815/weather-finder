@@ -9,19 +9,47 @@ function App() {
   const { weather, loading, error, searchWeather } = useWeather();
 
   return (
-    <main>
-      <h1>Weather Finder</h1>
-      <p>Search for the current weather in any city.</p>
+    <main className="weather-page">
+      <div className="page-container">
+        <header className="brand">
+          <span className="brand-icon" aria-hidden="true">
+            ☾
+          </span>
 
-      <SearchForm onSearch={searchWeather} />
+          <span>Weather Finder</span>
+        </header>
 
-      {loading && <LoadingSpinner />}
+        <section className="hero">
+          <p className="eyebrow">Live conditions · Worldwide</p>
 
-      {!loading && error && <ErrorMessage message={error} />}
+          <h1>Search any city for current conditions</h1>
 
-      {!loading && !error && weather && (
-        <WeatherCard weather={weather} />
-      )}
+          <p className="hero-description">
+            Enter a city to see its latest temperature, humidity and wind.
+          </p>
+        </section>
+
+        <SearchForm
+          onSearch={searchWeather}
+          loading={loading}
+        />
+
+        <section className="results" aria-live="polite">
+          {loading && <LoadingSpinner />}
+
+          {!loading && error && (
+            <ErrorMessage message={error} />
+          )}
+
+          {!loading && !error && weather && (
+            <WeatherCard weather={weather} />
+          )}
+        </section>
+
+        <footer>
+          Current weather data provided by Weatherstack
+        </footer>
+      </div>
     </main>
   );
 }
